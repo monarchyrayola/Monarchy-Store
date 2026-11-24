@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - Monarchy Store</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">MONARCHY STORE</a>
+        <a href="/" class="btn btn-outline-light">Continue Shopping</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">My Orders</h2>
+
+    {% for order in orders %}
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+
+            <h5>Order #{{ order.id }}</h5>
+
+            <p>
+                <strong>Date:</strong> {{ order.created_at }}
+            </p>
+
+            <p>
+                <strong>Total:</strong> TZS {{ order.total_amount }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                <span class="badge bg-warning text-dark">
+                    {{ order.status }}
+                </span>
+            </p>
+
+            <a href="{% url 'order_detail' order.id %}"
+               class="btn btn-dark btn-sm">
+                View Order
+            </a>
+
+        </div>
+    </div>
+
+    {% empty %}
+
+    <div class="alert alert-info text-center">
+        You have not placed any orders yet.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

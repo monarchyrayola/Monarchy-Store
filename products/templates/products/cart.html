@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Shopping Cart - Monarchy Store</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <a href="/" class="navbar-brand">MONARCHY STORE</a>
+        <a href="/" class="btn btn-outline-light">Continue Shopping</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">My Shopping Cart 🛒</h2>
+
+    {% if cart_items %}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for item in cart_items %}
+
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+
+                        <td>TZS {{ item.product.price }}</td>
+
+                        <td>{{ item.quantity }}</td>
+
+                        <td>TZS {{ item.subtotal }}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+            <h4 class="text-end">
+                Total: TZS {{ total }}
+            </h4>
+
+            <div class="text-end mt-3">
+                <a href="{% url 'checkout' %}"
+                   class="btn btn-success">
+                    Proceed to Checkout
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info">
+        Your shopping cart is empty.
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
